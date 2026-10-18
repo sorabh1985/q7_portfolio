@@ -1,0 +1,230 @@
+/* Sorabh portfolio: process-plant signage + equipment data sheet.
+   Edit the colours and fonts in :root; everything else follows. */
+
+:root {
+  --paper: #e8eef1;
+  --ink: #0c2233;
+  --muted: #47606f;
+  --line: #b4c4cd;
+  --pipe: #1c6a88;
+  --signal: #f2b705;
+  --on-signal: #0c2233;
+
+  --display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --text: "Source Serif 4", Charter, "Iowan Old Style", Georgia, serif;
+  --wrap: 62rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0a1c2b;
+    --ink: #e6f0f5;
+    --muted: #9fb6c4;
+    --line: #2b4a60;
+    --pipe: #63bfdc;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+main { flex: 1; }
+
+.wrap { width: min(100% - 2.5rem, var(--wrap)); margin-inline: auto; }
+
+a { color: var(--pipe); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 3px solid var(--pipe); outline-offset: 3px; }
+
+.skip {
+  position: absolute;
+  left: 1rem;
+  top: 0;
+  z-index: 10;
+  padding: 0.5rem 1rem;
+  background: var(--ink);
+  color: var(--paper);
+  transform: translateY(-120%);
+}
+.skip:focus { transform: none; }
+
+/* Header and navigation */
+.top { border-bottom: 2px solid var(--ink); }
+.top .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding-block: 0.9rem;
+}
+.brand {
+  font: 800 1.5rem/1 var(--display);
+  font-stretch: 70%;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.top nav ul { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; list-style: none; margin: 0; padding: 0; }
+.top nav a {
+  display: inline-block;
+  padding: 0.35rem 0;
+  border-bottom: 3px solid transparent;
+  font: 600 1rem/1.4 var(--display);
+  font-stretch: 90%;
+  color: var(--muted);
+  text-decoration: none;
+}
+.top nav a:hover { color: var(--ink); }
+.top nav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--signal); }
+
+/* Hero */
+.hero { padding-block: clamp(2.5rem, 8vw, 5.5rem) 3.5rem; }
+.hero h1 {
+  margin: 0 0 0.12em;
+  font: 800 clamp(5rem, 22vw, 12rem)/0.82 var(--display);
+  font-stretch: 62%;
+  letter-spacing: -0.01em;
+}
+.role {
+  margin: 0 0 1.25rem;
+  font: 600 clamp(1.25rem, 3vw, 1.75rem)/1.2 var(--display);
+  font-stretch: 85%;
+}
+.lead { max-width: 36rem; margin: 0 0 1.75rem; font-size: 1.3rem; line-height: 1.55; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.btn {
+  display: inline-block;
+  padding: 0.65rem 1.25rem;
+  border: 2px solid var(--ink);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--ink);
+  font: 700 1rem/1.2 var(--display);
+  font-stretch: 90%;
+  text-decoration: none;
+}
+.btn.primary { background: var(--signal); border-color: var(--signal); color: var(--on-signal); }
+.btn:hover, .btn.primary:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+/* The pipeline: the one animated moment, runs once on load */
+.flow {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0 1.5rem;
+  margin: 3rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.flow::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 11px;
+  height: 6px;
+  background: var(--pipe);
+  transform-origin: left center;
+  animation: run 1.3s cubic-bezier(0.65, 0, 0.25, 1) 0.2s both;
+}
+.flow li { position: relative; padding-top: 2.5rem; }
+.flow li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 6px solid var(--ink);
+  background: var(--paper);
+  animation: pop 0.35s ease-out both;
+}
+.flow li:nth-child(1)::before { animation-delay: 0.2s; }
+.flow li:nth-child(2)::before { animation-delay: 0.85s; }
+.flow li:nth-child(3)::before { animation-delay: 1.4s; }
+.flow strong { display: block; font: 700 1.15rem/1.2 var(--display); font-stretch: 85%; }
+.flow span { display: block; max-width: 16rem; margin-top: 0.25rem; color: var(--muted); font-size: 1rem; line-height: 1.5; }
+
+@keyframes run { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes runY { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes pop { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: scale(1); } }
+
+@media (max-width: 40rem) {
+  .flow { grid-template-columns: 1fr; }
+  .flow::before {
+    left: 11px;
+    right: auto;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    height: auto;
+    transform-origin: center top;
+    animation-name: runY;
+  }
+  .flow li { padding: 0 0 1.5rem 3rem; }
+  .flow li:last-child { padding-bottom: 0; }
+  .flow li::before { top: 0.1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow::before, .flow li::before { animation: none; }
+}
+
+/* Content blocks */
+.block { padding-block: 3rem; border-top: 2px solid var(--ink); }
+.block h2 {
+  margin: 0 0 1.5rem;
+  font: 800 clamp(2rem, 5vw, 3rem)/1 var(--display);
+  font-stretch: 70%;
+}
+.prose { max-width: 38rem; }
+.prose p { margin: 0 0 1rem; }
+
+.page-title {
+  margin: 0 0 1rem;
+  font: 800 clamp(3rem, 10vw, 6rem)/0.9 var(--display);
+  font-stretch: 62%;
+}
+.page { padding-block: clamp(2rem, 6vw, 4rem) 3rem; }
+.page .lead { margin-bottom: 2.5rem; }
+
+/* Equipment data sheet: label / value rows */
+.sheet { max-width: 46rem; margin: 1.5rem 0 0; }
+.sheet div {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  gap: 0.25rem 1.5rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px dashed var(--line);
+}
+.sheet dt { font: 600 1rem/1.7 var(--display); font-stretch: 90%; color: var(--muted); }
+.sheet dd { margin: 0; }
+@media (max-width: 40rem) { .sheet div { grid-template-columns: 1fr; } }
+
+/* Projects */
+.projects { display: grid; gap: 2.25rem; max-width: 46rem; margin: 0; padding: 0; list-style: none; }
+.project { padding-left: 1.25rem; border-left: 6px solid var(--pipe); }
+.project h2 { margin: 0 0 0.4rem; font: 700 1.6rem/1.15 var(--display); font-stretch: 80%; }
+.project p { margin: 0 0 0.6rem; }
+.project .stack { margin: 0; font: 600 0.95rem/1.5 var(--display); font-stretch: 90%; color: var(--muted); }
+
+/* Footer */
+.foot { padding-block: 1.5rem 2.5rem; border-top: 2px solid var(--ink); color: var(--muted); font-size: 1rem; }
+.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1.5rem; }
+.foot p { margin: 0; }

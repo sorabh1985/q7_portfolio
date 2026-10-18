@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects | Sorabh</title>
+  <meta name="description" content="Selected projects by Sorabh.">
+  <meta name="theme-color" content="#0c2233">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="index.html">Sorabh</a>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="projects.html" aria-current="page">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="page wrap">
+    <h1 class="page-title">Projects</h1>
+    <p class="lead">A few things I have built outside of day-to-day SAP work.</p>
+
+    <ul class="projects">
+      <li class="project">
+        <h2>Layered configuration API</h2>
+        <p>A FastAPI service that merges defaults, an environment YAML file, a .env file and OS environment variables, then applies per-request overrides from the query string. It coerces types, resolves aliases and masks secrets in every response.</p>
+        <p class="stack">Python, FastAPI, Docker</p>
+      </li>
+
+      <li class="project">
+        <h2>File reorganiser</h2>
+        <p>A shell script that flattens a nested archive into category folders, using each file's category tag. It handles spaces and non-ASCII names, and gives the same result on every machine.</p>
+        <p class="stack">Bash, sha256sum verification</p>
+      </li>
+
+      <li class="project">
+        <h2>This site</h2>
+        <p>A small static portfolio with no build step. Each page is one HTML file that shares a single stylesheet.</p>
+        <p class="stack">HTML, CSS, GitHub Pages</p>
+      </li>
+
+      <!--
+        To add a project, copy one <li class="project"> block above and edit the text.
+      -->
+    </ul>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <p>&copy; 2026 Sorabh</p>
+      <p>Plain HTML and CSS, hosted on GitHub Pages</p>
+    </div>
+  </footer>
+</body>
+</html>
